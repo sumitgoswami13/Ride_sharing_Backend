@@ -1,7 +1,8 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const { passport, generateToken } = require('./src/utlis/googleAuth');
+const { passport } = require('./src/utlis/googleAuth');
+const { generateToken } = require('./src/utlis/authToken')
 const connectDB = require('./src/config/dB');
 const app = express();
 const PORT = 3000;
