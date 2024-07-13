@@ -1,6 +1,5 @@
 const amqp = require('amqplib');
 const nodemailer = require('nodemailer');
-const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
 
@@ -16,8 +15,14 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+const generateOTP = () => {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+  };
+
 async function sendOtp(email) {
-  const otp = uuidv4().split('-')[0];
+  const otp = generateOTP();
+  // save otp to database 
+  // then send the mail
   const mailOptions = {
     from: 'your_email@gmail.com',
     to: email,

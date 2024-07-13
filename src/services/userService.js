@@ -3,18 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const amqp = require('amqplib');
 const SECRET_KEY = 'your_secret_key'; 
-
+const {sendToQueue}=require('../utlis/sendMessage')
 const rabbitMQUrl = 'amqp://localhost';
-
-async function sendToQueue(queue, message) {
-  const connection = await amqp.connect(rabbitMQUrl);
-  const channel = await connection.createChannel();
-  await channel.assertQueue(queue, { durable: true });
-  channel.sendToQueue(queue, Buffer.from(message), { persistent: true });
-  setTimeout(() => {
-    connection.close();
-  }, 500);
-}
 
 const signup = async (req, res) => {
   const { username, email, password } = req.body;
