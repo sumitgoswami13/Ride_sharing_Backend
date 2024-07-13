@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the backend implementation for a ridesharing application built with Node.js, utilizing Prisma ORM for database operations with MongoDB, RabbitMQ for message queueing, and Firebase for real-time notifications.
+This repository contains the backend implementation for a ridesharing application built with Node.js, utilizing mongoosw ODM for database operations with MongoDB, RabbitMQ for message queueing, and Firebase for real-time notifications.
 
 ## Features
 
@@ -20,7 +20,3 @@ This repository contains the backend implementation for a ridesharing applicatio
 - **MongoDB**: NoSQL database for storing application data.
 - **RabbitMQ**: Message broker for handling asynchronous tasks and communication.
 - **Firebase**: Real-time database and notification service.
-
-## Installation
-
-1. **Clone the repository:**
