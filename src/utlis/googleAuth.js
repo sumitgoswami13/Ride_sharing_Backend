@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const jwt = require('jsonwebtoken');
+const { sendToQueue } = require('./sendMessage');
 require('dotenv').config()
 
 passport.use(new GoogleStrategy({
@@ -15,6 +16,7 @@ passport.use(new GoogleStrategy({
       email: profile.emails[0].value
     };
     console.log(user);
+    //sendToQueue('signup_queue', JSON.stringify({ email: 'user@example.com', userId: '12345' }));
     return done(null, user);
   }
 ));
