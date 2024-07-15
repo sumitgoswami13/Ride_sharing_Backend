@@ -6,6 +6,7 @@ const { generateToken } = require('./src/middleware/authToken')
 const connectDB = require('./src/config/dB');
 const app = express();
 const PORT = 3000;
+const userRouter = require("./src/routes/userRoutes")
 
 app.use(session({
   secret: 'your_session_secret',
@@ -28,12 +29,7 @@ app.get('/auth/google/callback',
     res.json({ token });
   });
 
-app.get('/', (req, res) => {
-  res.status(200).json({
-    success: true,
-    msg: "Server up and running"
-  });
-});
+app.use('/user',userRouter)
 
 connectDB();
 app.listen(PORT, () => {

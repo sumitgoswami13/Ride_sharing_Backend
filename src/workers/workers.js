@@ -2,11 +2,8 @@ const amqp = require('amqplib');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
-
-const rabbitMQUrl = 'amqp://localhost'; // Replace with your RabbitMQ URL
+const rabbitMQUrl = 'amqp://localhost';
 const queue = 'task_queue';
-
-
 const transporter = nodemailer.createTransport({
   service: 'gmail', 
   auth: {
@@ -21,8 +18,6 @@ const generateOTP = () => {
 
 async function sendOtp(email) {
   const otp = generateOTP();
-  // save otp to database 
-  // then send the mail
   const mailOptions = {
     from: 'your_email@gmail.com',
     to: email,
@@ -48,19 +43,18 @@ async function uploadImage(imageData, imageName) {
   }
 }
 
-async function sendNotification(email, message) {
-  const mailOptions = {
-    from: 'your_email@gmail.com',
-    to: email,
-    subject: 'Notification',
-    text: message
-  };
-
+async function sendNotification(token, notification) {
   try {
-    await transporter.sendMail(mailOptions);
-    console.log(`Notification sent to ${email}`);
+    await admin.messaging().send({
+      token: token,
+      notification: {
+        title: 'Notification',
+        body: notification,
+      },
+    });
+    console.log(`Notification sent to device with token: ${token}`);
   } catch (error) {
-    console.error(`Failed to send notification to ${email}`, error);
+    console.error(`Failed to send notification to device with token: ${token}`, error);
   }
 }
 

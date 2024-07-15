@@ -12,7 +12,7 @@ async function sendToQueue(queue, message) {
     }, 500);
   } catch (error) {
     console.error('Error sending message to queue:', error);
-  }
+  } 
 }
 
 module.exports = {sendToQueue}
