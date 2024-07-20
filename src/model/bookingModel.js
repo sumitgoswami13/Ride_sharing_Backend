@@ -39,10 +39,7 @@ const bookingSchema = new Schema({
 
 bookingSchema.index({ pickupLocation: '2dsphere' });
 bookingSchema.index({ dropLocation: '2dsphere' });
-
 module.exports = mongoose.model('Booking', bookingSchema);
-
-
 const Booking = mongoose.model('Booking', bookingSchema);
 
 module.exports = Booking;
